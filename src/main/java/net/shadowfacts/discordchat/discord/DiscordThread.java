@@ -64,16 +64,18 @@ public class DiscordThread implements Runnable {
 
 	public void sendMessageToAllChannels(String message) {
 		for (String name : DCConfig.channels) {
-			Optional<TextChannel> channel = getChannel(name);
-			if (channel.isPresent()) {
-				channel.get().sendMessage(message);
+			TextChannel channel = jda.getTextChannelsByName(name).get(0);
+			if (channel != null) {
+				channel.sendMessage(message);
 			}
 		}
 	}
 
+/*
 	private Optional<TextChannel> getChannel(String name) {
 		return jda.getGuildById(DCConfig.serverId).getTextChannels().stream()
 				.filter(channel -> channel.getName().equalsIgnoreCase(name))
 				.findFirst();
 	}
+*/
 }

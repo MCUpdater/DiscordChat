@@ -1,7 +1,6 @@
 package net.shadowfacts.discordchat;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.common.gameevent.PlayerEvent;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraftforge.event.ServerChatEvent;
@@ -45,19 +44,4 @@ public class ForgeEventHandler {
 			}
 		}
 	}
-
-	@SubscribeEvent
-	public void onPlayerLoggedIn(PlayerEvent.PlayerLoggedInEvent event) {
-		if (DCConfig.sendPlayerJoinLeaveMessages) {
-			DiscordThread.instance.sendMessageToAllChannels(MiscUtils.createLoggedInMessage(event.player));
-		}
-	}
-
-	@SubscribeEvent
-	public void onPlayerLoggedOut(PlayerEvent.PlayerLoggedOutEvent event) {
-		if (DCConfig.sendPlayerJoinLeaveMessages) {
-			DiscordThread.instance.sendMessageToAllChannels(MiscUtils.createLoggedOutMessage(event.player));
-		}
-	}
-
 }

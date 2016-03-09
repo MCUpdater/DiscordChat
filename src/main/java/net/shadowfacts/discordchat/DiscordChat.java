@@ -1,5 +1,6 @@
 package net.shadowfacts.discordchat;
 
+import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
@@ -11,11 +12,10 @@ import org.apache.logging.log4j.Logger;
 /**
  * @author shadowfacts
  */
-@Mod(modid = DiscordChat.modId, name = DiscordChat.modId, version = DiscordChat.version, acceptableRemoteVersions = "*")
+@Mod(modid = DiscordChat.modId, useMetadata = true, acceptableRemoteVersions = "*")
 public class DiscordChat {
 
 	public static final String modId = "DiscordChat";
-	public static final String version = "0.1.0";
 
 	public static Logger log = LogManager.getLogger(modId);
 
@@ -25,6 +25,7 @@ public class DiscordChat {
 
 		if (DCConfig.enabled) {
 			MinecraftForge.EVENT_BUS.register(new ForgeEventHandler());
+			FMLCommonHandler.instance().bus().register(new PlayerEventHandler());
 		}
 	}
 
